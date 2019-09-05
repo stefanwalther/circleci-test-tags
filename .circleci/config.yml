@@ -68,9 +68,24 @@ jobs:
             fi
             docker push $DOCKER_REPO
 
+
+
+
+  deploy_any:
+    steps:
+      - run:
+          name: Test
+          command: |
+            PKG_VER=$(cat ./version.txt)
+            echo $PKG_VER
+
+
 worflows:
   version: 2
 
   build-deploy:
     jobs:
       - build
+      - deploy_any:
+          requires:
+            - build
