@@ -20,7 +20,6 @@ jobs:
           name: Pull public docker images in the background
           background: true
           command: |
-            NODE_VER=$(cat ./.nvmrc)
             docker pull busybox
       - run:
           name: Upgrade Docker Compose
