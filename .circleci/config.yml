@@ -3,6 +3,8 @@ version: 2.1
 jobs:
   build:
 
+    machine: true
+
     environment:
       SERVICE_NAME: circleci-test-tags
       DOCKER_REPO: stefanwalther/circleci-test-tags
