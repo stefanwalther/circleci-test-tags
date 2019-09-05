@@ -1,6 +1,8 @@
 # circleci-test-tags
 
 > Some experiments with CircleCI
+>
+>[![CircleCI](https://img.shields.io/circleci/project/github/stefanwalther/circleci-test-tags.svg)](https://circleci.com/gh/stefanwalther/circleci-test-tags)
 
 ---
 
