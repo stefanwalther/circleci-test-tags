@@ -72,6 +72,9 @@ jobs:
 
 
   deploy_any:
+    machine: true
+    working_directory: ~/circleci-test-tags
+
     steps:
       - run:
           name: Test
