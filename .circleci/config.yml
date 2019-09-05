@@ -83,7 +83,7 @@ jobs:
             echo $PKG_VER
 
 
-worflows:
+workflows:
   version: 2
 
   build-deploy:
