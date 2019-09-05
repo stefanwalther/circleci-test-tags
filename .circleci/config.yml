@@ -46,24 +46,24 @@ jobs:
           name: Build image
           command: make build
       - add_ssh_keys
-      - deploy:
-          name: Push image(s) to Docker Hub
-          command: |
-            PKG_VER=$(cat ./version.txt)
-            BUILD_NR="${CIRCLE_BUILD_NUM}"
-
-            # Always push the build-nr
-            docker tag $DOCKER_REPO $DOCKER_REPO:$PKG_VER.$BUILD_NR
-
-            # Only branch "master" is being pushed to Docker Hub
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              if [ ! -z "$CIRCLE_TAG" ]; then
-                docker tag $DOCKER_REPO $DOCKER_REPO:$CIRCLE_TAG
-              fi
-              docker tag $DOCKER_REPO "${DOCKER_REPO}:${PKG_VER}"
-              docker tag $DOCKER_REPO $DOCKER_REPO:latest
-            fi
-            docker push $DOCKER_REPO
+#      - deploy:
+#          name: Push image(s) to Docker Hub
+#          command: |
+#            PKG_VER=$(cat ./version.txt)
+#            BUILD_NR="${CIRCLE_BUILD_NUM}"
+#
+#            # Always push the build-nr
+#            docker tag $DOCKER_REPO $DOCKER_REPO:$PKG_VER.$BUILD_NR
+#
+#            # Only branch "master" is being pushed to Docker Hub
+#            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+#              if [ ! -z "$CIRCLE_TAG" ]; then
+#                docker tag $DOCKER_REPO $DOCKER_REPO:$CIRCLE_TAG
+#              fi
+#              docker tag $DOCKER_REPO "${DOCKER_REPO}:${PKG_VER}"
+#              docker tag $DOCKER_REPO $DOCKER_REPO:latest
+#            fi
+#            docker push $DOCKER_REPO
 
 
   push_any:
