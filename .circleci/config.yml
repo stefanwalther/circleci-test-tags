@@ -3,7 +3,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: buildpack-deps:jessie
+      - image: node
     working_directory: ~/circleci-test-tags
 
 jobs:
