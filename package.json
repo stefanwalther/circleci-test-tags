@@ -1,0 +1,22 @@
+{
+  "name": "circleci-test-tags",
+  "version": "0.1.0",
+  "description": "test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefanwalther/circleci-test-tags.git"
+  },
+  "keywords": [
+    "circleci"
+  ],
+  "author": "Stefan Walther <swr.nixda@gmail.com> (http://qliksite.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stefanwalther/circleci-test-tags/issues"
+  },
+  "homepage": "https://github.com/stefanwalther/circleci-test-tags#readme"
+}
