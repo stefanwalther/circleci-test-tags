@@ -1,8 +1,14 @@
-version: 2
+version: 2.1
+
+executors:
+  my-executor:
+    docker:
+      - image: buildpack-deps:jessie
+    working_directory: ~/circleci-test-tags
+
 jobs:
   build:
-    working_directory: ~/circleci-test-tags
-    machine: true
+    executor: my-executor
     environment:
       SERVICE_NAME: circleci-test-tags
       DOCKER_REPO: stefanwalther/circleci-test-tags
@@ -62,3 +68,10 @@ jobs:
               docker tag $DOCKER_REPO $DOCKER_REPO:latest
             fi
             docker push $DOCKER_REPO
+
+worflows:
+  version: 2
+
+  btd:
+    jobs:
+      - build
