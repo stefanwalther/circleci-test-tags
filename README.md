@@ -1,10 +1,8 @@
 # circleci-test-tags
 
-> test
+> Some experiments with CircleCI
 
 ---
-
-Some experiments with CircleCI.
 
 ***
 

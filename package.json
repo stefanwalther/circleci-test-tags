@@ -1,7 +1,7 @@
 {
   "name": "circleci-test-tags",
   "version": "0.1.0",
-  "description": "test",
+  "description": "Some experiments with CircleCI",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
