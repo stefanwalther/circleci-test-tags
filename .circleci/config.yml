@@ -5,6 +5,8 @@ defaults: &defaults
     DOCKER_REPO: stefanwalther/circleci-test-tags
     DOCKER_URL: https://download.docker.com/linux/static/edge/x86_64/docker-18.09.6.tgz
     DOCKER_COMPOSE_URL: https://github.com/docker/compose/releases/download/1.24.0/docker-compose-Linux-x86_64
+  machine:
+    docker_layer_caching: true
 
 version: 2.1
 
@@ -14,8 +16,6 @@ jobs:
 
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
 #      - run:
 #          name: Upgrade Docker
 #          command: |
@@ -57,8 +57,6 @@ jobs:
   push_any:
     <<: *defaults
     steps:
-      - setup_remote_docker:
-          docker_layer_caching: true
       - attach_workspace:
             at: ~/circleci-test-tags
       - run:
