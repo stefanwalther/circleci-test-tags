@@ -5,13 +5,14 @@ defaults: &defaults
     DOCKER_REPO: stefanwalther/circleci-test-tags
     DOCKER_URL: https://download.docker.com/linux/static/edge/x86_64/docker-18.09.6.tgz
     DOCKER_COMPOSE_URL: https://github.com/docker/compose/releases/download/1.24.0/docker-compose-Linux-x86_64
+  machine:
+    docker_layer_caching: true
 
 version: 2.1
 
 jobs:
   build:
     <<: *defaults
-    machine: true
 
     steps:
       - checkout
@@ -51,30 +52,10 @@ jobs:
       - run:
           name: Build image
           command: make build
-#      - add_ssh_keys
-#      - deploy:
-#          name: Push image(s) to Docker Hub
-#          command: |
-#            PKG_VER=$(cat ./version.txt)
-#            BUILD_NR="${CIRCLE_BUILD_NUM}"
-#
-#            # Always push the build-nr
-#            docker tag $DOCKER_REPO $DOCKER_REPO:$PKG_VER.$BUILD_NR
-#
-#            # Only branch "master" is being pushed to Docker Hub
-#            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-#              if [ ! -z "$CIRCLE_TAG" ]; then
-#                docker tag $DOCKER_REPO $DOCKER_REPO:$CIRCLE_TAG
-#              fi
-#              docker tag $DOCKER_REPO "${DOCKER_REPO}:${PKG_VER}"
-#              docker tag $DOCKER_REPO $DOCKER_REPO:latest
-#            fi
-#            docker push $DOCKER_REPO
 
 
   push_any:
     <<: *defaults
-    machine: true
     steps:
       - attach_workspace:
             at: ~/circleci-test-tags
@@ -112,7 +93,7 @@ jobs:
 workflows:
   version: 2
 
-  build-deploy:
+  workflow:
     jobs:
       - build
       - push_any:
