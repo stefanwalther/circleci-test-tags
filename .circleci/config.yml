@@ -89,8 +89,11 @@ jobs:
       - run:
           name: Push image(s) to Docker Hub
           command: |
+            PKG_VER=$(cat ~/circleci-test-tags/version.txt)
             echo "Pushing image using PKG_VER: $PKG_VER"
             BUILD_NR="${CIRCLE_BUILD_NUM}"
+
+            echo "We have BUILD_NR: $BUILD_NR"
 
             # Always push the build-nr
             docker tag $DOCKER_REPO $DOCKER_REPO:$PKG_VER.$BUILD_NR
