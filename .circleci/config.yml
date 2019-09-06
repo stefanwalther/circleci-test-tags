@@ -1,8 +1,11 @@
+defaults: &defaults
+  working_directory: /circleci-test-tags
+
 version: 2.1
 
 jobs:
   build:
-
+    <<: *defaults
     machine: true
 
     environment:
@@ -10,8 +13,6 @@ jobs:
       DOCKER_REPO: stefanwalther/circleci-test-tags
       DOCKER_URL: https://download.docker.com/linux/static/edge/x86_64/docker-18.09.6.tgz
       DOCKER_COMPOSE_URL: https://github.com/docker/compose/releases/download/1.24.0/docker-compose-Linux-x86_64
-
-    working_directory: ~/circleci-test-tags
 
     steps:
       - checkout
@@ -21,11 +22,11 @@ jobs:
 #            set -e
 #            curl -sSL $DOCKER_URL | sudo tar -xz --strip-components=1 -C /usr/bin/
 #            sudo service docker restart
-      - run:
-          name: Pull public docker images in the background
-          background: true
-          command: |
-            docker pull busybox
+#      - run:
+#          name: Pull public docker images in the background
+#          background: true
+#          command: |
+#            docker pull busybox
 #      - run:
 #          name: Upgrade Docker Compose
 #          command: |
@@ -44,14 +45,14 @@ jobs:
               npm version $VER --no-git-tag-version
             fi
       - persist_to_workspace:
-          root: ~/circleci-test-tags
+          root: workspace
           paths:
             - version.txt
 
       - run:
           name: Build image
           command: make build
-      - add_ssh_keys
+#      - add_ssh_keys
 #      - deploy:
 #          name: Push image(s) to Docker Hub
 #          command: |
@@ -73,18 +74,18 @@ jobs:
 
 
   push_any:
+    <<: *defaults
     machine: true
-
-    working_directory: ~/circleci-test-tags
-
     steps:
+      - attach_workspace:
+            at: /circleci-test-tags/workspace
       - run:
           name: Log in to DockerHub
           command: docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
       - run:
           name: Test
           command: |
-            PKG_VER=$(cat ./version.txt)
+            PKG_VER=$(cat /circleci-test-tags/version.txt)
             echo $PKG_VER
 
 
