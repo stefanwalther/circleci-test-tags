@@ -1,5 +1,5 @@
 defaults: &defaults
-  working_directory: /circleci-test-tags
+  working_directory: ~/circleci-test-tags
 
 version: 2.1
 
