@@ -43,6 +43,11 @@ jobs:
             if (echo $VER | egrep -- '-[0-9]+$' 1> /dev/null); then
               npm version $VER --no-git-tag-version
             fi
+      - persist_to_workspace:
+          root: ~/circleci-test-tags
+          paths:
+            - version.txt
+
       - run:
           name: Build image
           command: make build
