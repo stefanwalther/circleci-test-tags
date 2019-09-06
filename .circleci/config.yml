@@ -90,7 +90,6 @@ jobs:
       - deploy:
           name: Push image(s) to Docker Hub
           command: |
-            PKG_VER=$(cat ./version.txt)
             BUILD_NR="${CIRCLE_BUILD_NUM}"
 
             # Always push the build-nr
