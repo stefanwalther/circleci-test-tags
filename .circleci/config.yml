@@ -17,23 +17,10 @@ jobs:
     steps:
       - checkout
 #      - run:
-#          name: Upgrade Docker
-#          command: |
-#            set -e
-#            curl -sSL $DOCKER_URL | sudo tar -xz --strip-components=1 -C /usr/bin/
-#            sudo service docker restart
-#      - run:
 #          name: Pull public docker images in the background
 #          background: true
 #          command: |
 #            docker pull busybox
-#      - run:
-#          name: Upgrade Docker Compose
-#          command: |
-#            set -e
-#            loc=$(which docker-compose)
-#            sudo curl -sSLf -z $loc -o $loc $DOCKER_COMPOSE_URL
-#            sudo chmod 755 $loc
       - run:
           name: Update version
           command: |
@@ -48,7 +35,6 @@ jobs:
           root: ~/circleci-test-tags
           paths:
             - version.txt
-
       - run:
           name: Build image
           command: make build
