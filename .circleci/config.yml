@@ -86,7 +86,7 @@ jobs:
           name: Test
           command: |
             PKG_VER=$(cat ~/circleci-test-tags/version.txt)
-            echo $PKG_VER
+            echo "We are working with version $PKG_VER"
       - deploy:
           name: Push image(s) to Docker Hub
           command: |
