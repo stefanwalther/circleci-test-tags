@@ -16,6 +16,7 @@ jobs:
 
     steps:
       - checkout
+      - setup-remote-docker
 #      - run:
 #          name: Upgrade Docker
 #          command: |
@@ -57,6 +58,7 @@ jobs:
   push_any:
     <<: *defaults
     steps:
+      - setup_remote_docker
       - attach_workspace:
             at: ~/circleci-test-tags
       - run:
