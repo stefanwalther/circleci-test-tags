@@ -42,6 +42,10 @@ jobs:
           name: Save Docker image
           command: |
             docker save -o ~/circleci-test-tags/circleci-test-tags.tar "$DOCKER_REPO"
+      - persist_to_workspace:
+          root: ~/circleci-test-tags
+          paths:
+            - circleci-test-tags.targ
 
 
   push_any:
