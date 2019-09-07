@@ -99,6 +99,7 @@ jobs:
 
             echo "push_tags_only"
             echo "We have PKG_VER: $PKG_VER"
+            echo "The current CIRCLE_TAG: $CIRCLE_TAG"
 
             # Only branch "master" is being pushed to Docker Hub
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
