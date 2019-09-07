@@ -3,8 +3,6 @@ defaults: &defaults
   environment:
     SERVICE_NAME: circleci-test-tags
     DOCKER_REPO: stefanwalther/circleci-test-tags
-    DOCKER_URL: https://download.docker.com/linux/static/edge/x86_64/docker-18.09.6.tgz
-    DOCKER_COMPOSE_URL: https://github.com/docker/compose/releases/download/1.24.0/docker-compose-Linux-x86_64
   machine:
     docker_layer_caching: true
 
@@ -44,7 +42,7 @@ jobs:
             - circleci-test-tags.tar
             - version.txt
 
-  push_any:
+  docker_push_any:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -77,7 +75,7 @@ jobs:
             docker tag $DOCKER_REPO $DOCKER_REPO:$PKG_VER.$BUILD_NR
             docker push $DOCKER_REPO
 
-  push_tags_only:
+  docker_push_tags_only:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -114,10 +112,10 @@ workflows:
   workflow:
     jobs:
       - build
-      - push_any:
+      - docker_push_any:
           requires:
             - build
-      - push_tags_only:
+      - docker_push_tags_only:
           requires:
             - build
           filters:
