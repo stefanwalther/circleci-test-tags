@@ -115,7 +115,6 @@ jobs:
 
 workflows:
   version: 2
-
   untagged-build:
     jobs:
       - build
@@ -127,10 +126,10 @@ workflows:
       - build: *only-deploy-tags
       - docker_push_any:
         <<: *only-deploy-tags
-          requires:
-            - build
+        requires:
+          - build
       - docker_push_tags:
         <<: *only-deploy-tags
-          requires:
-            - build
+        requires:
+          - build
 
