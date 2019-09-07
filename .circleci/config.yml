@@ -84,7 +84,7 @@ jobs:
             docker tag $DOCKER_REPO $DOCKER_REPO:$PKG_VER.$BUILD_NR
             docker push $DOCKER_REPO
 
-  docker_push_tags_only:
+  docker_push_tags:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -114,7 +114,7 @@ jobs:
             docker push $DOCKER_REPO
 
 workflows:
-  version: 2
+  version: 2.1
   untagged-build:
     jobs:
       - build
@@ -125,11 +125,11 @@ workflows:
     jobs:
       - build: *only-deploy-tags
       - docker_push_any:
-        <<: *only-deploy-tags
-        requires:
-          - build
+          <<: *only-deploy-tags
+          requires:
+            - build
       - docker_push_tags:
-        <<: *only-deploy-tags
-        requires:
-          - build
+          <<: *only-deploy-tags
+          requires:
+            - build
 
