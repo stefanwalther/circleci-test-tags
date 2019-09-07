@@ -1,6 +1,6 @@
 {
   "name": "circleci-test-tags",
-  "version": "0.2.367",
+  "version": "0.2.37",
   "description": "Some experiments with CircleCI",
   "main": "index.js",
   "scripts": {
