@@ -49,9 +49,9 @@ jobs:
     steps:
       - attach_workspace:
             at: ~/circleci-test-tags
-      - run:
-          name: List workspace
-          command: ls -la ~/circleci-test-tags
+#      - run:
+#          name: List workspace
+#          command: ls -la ~/circleci-test-tags
       - run:
           name: Load Docker image
           command: |
