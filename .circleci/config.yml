@@ -6,6 +6,13 @@ defaults: &defaults
   machine:
     docker_layer_caching: true
 
+only-deploy-tags: &only-deploy-tags
+  filters:
+    tags:
+      only: /^deploy-.*/
+    branches:
+      ignore: /.*/
+
 version: 2.1
 
 jobs:
@@ -109,21 +116,21 @@ jobs:
 workflows:
   version: 2
 
-  workflow:
+  untagged-build:
     jobs:
       - build
       - docker_push_any:
           requires:
             - build
-      - docker_push_tags_only:
-          requires:
-            - build
-          filters:
-            # ignore any commit on any branch by default
-            branches:
-              only: master
-            # only act on version tags
-            tags:
-              only: /v.*/
-
+   tagged-build:
+     jobs:
+       - build: *only-deploy-tags
+       - docker_push_any:
+           <<: *only-deploy-tags
+           requires:
+             - build
+       - docker_push_tags:
+           <<: *only-deploy-tags
+           requires:
+             - build
 
