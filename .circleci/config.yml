@@ -70,7 +70,7 @@ jobs:
             echo "push_any"
             echo "We have PKG_VER: $PKG_VER"
             echo "We have BUILD_NR: $BUILD_NR"
-            eoch "We have CIRCLE_BUILD_NUM: $CIRLCE_BUILD_NUM"
+            echo "We have CIRCLE_BUILD_NUM: $CIRLCE_BUILD_NUM"
             echo "We have CIRCLE_TAG: $CIRCLE_TAG"
 
             # Always push the build-nr
