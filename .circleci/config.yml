@@ -41,7 +41,7 @@ jobs:
       - run:
           name: Save Docker image
           command: |
-            docker save -o ~/circleci-test-tags "$DOCKER_REPO"
+            docker save -o ~/circleci-test-tags/circleci-test-tags.tar "$DOCKER_REPO"
 
 
   push_any:
