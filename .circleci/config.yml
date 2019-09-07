@@ -45,7 +45,7 @@ jobs:
       - persist_to_workspace:
           root: ~/circleci-test-tags
           paths:
-            - circleci-test-tags.targ
+            - circleci-test-tags.tar
 
 
   push_any:
