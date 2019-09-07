@@ -103,9 +103,12 @@ jobs:
 
             # Only branch "master" is being pushed to Docker Hub
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              docker tag $DOCKER_REPO "${DOCKER_REPO}:${PKG_VER}"
+              if [ -z "$CIRCLE_TAG" ]; then
+                echo "OK, we are pushing the version"
+                docker tag $DOCKER_REPO "${DOCKER_REPO}:${PKG_VER}"
+                docker push $DOCKER_REPO
+              fi
             fi
-            docker push $DOCKER_REPO
 
 workflows:
   version: 2
