@@ -1,5 +1,5 @@
 defaults: &defaults
-  working_directory: ~/circleci-test-tags
+  working_directory: ~/circleci-test-tags # <= here to /tmp
   environment:
     SERVICE_NAME: circleci-test-tags
     DOCKER_REPO: stefanwalther/circleci-test-tags
@@ -34,9 +34,11 @@ jobs:
           command: make build
       - run:
           name: Save Docker image
+          # here to /tmp
           command: |
             docker save -o ~/circleci-test-tags/circleci-test-tags.tar "$DOCKER_REPO"
       - persist_to_workspace:
+          # here to tmp
           root: ~/circleci-test-tags
           paths:
             - circleci-test-tags.tar
@@ -46,7 +48,7 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-            at: ~/circleci-test-tags
+          at: ~/circleci-test-tags
       - run:
           name: Load Docker image
           command: |
@@ -79,7 +81,7 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-            at: ~/circleci-test-tags
+          at: ~/circleci-test-tags
       - run:
           name: Load Docker image
           command: |
