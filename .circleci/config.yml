@@ -122,15 +122,15 @@ workflows:
       - docker_push_any:
           requires:
             - build
-   tagged-build:
-     jobs:
-       - build: *only-deploy-tags
-       - docker_push_any:
-           <<: *only-deploy-tags
-           requires:
-             - build
-       - docker_push_tags:
-           <<: *only-deploy-tags
-           requires:
-             - build
+  tagged-build:
+    jobs:
+      - build: *only-deploy-tags
+      - docker_push_any:
+        <<: *only-deploy-tags
+          requires:
+            - build
+      - docker_push_tags:
+        <<: *only-deploy-tags
+          requires:
+            - build
 
