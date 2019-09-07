@@ -103,14 +103,8 @@ jobs:
             echo "We have PKG_VER: $PKG_VER"
             echo "The current CIRCLE_TAG: $CIRCLE_TAG"
 
-            # Only branch "master" is being pushed to Docker Hub
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              if [ -z "$CIRCLE_TAG" ]; then
-                echo "OK, we are pushing the tag $CIRCLE_TAG"
-                docker tag $DOCKER_REPO "${DOCKER_REPO}:${PKG_VER}"
-                docker push $DOCKER_REPO
-              fi
-            fi
+            docker tag $DOCKER_REPO "${DOCKER_REPO}:${PKG_VER}"
+            docker push $DOCKER_REPO
 
 workflows:
   version: 2
