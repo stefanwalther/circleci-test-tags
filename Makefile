@@ -8,10 +8,6 @@ help:								## Show this help.
 	@echo ''
 .PHONY: help
 
-gen-readme:							## Generate README.md (using docker-verb)
-	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
-.PHONY: gen-readme
-
 build:								## Build the docker image (prod)
 	NODE_VER=$(NODE_VER)
 	docker build -t $(DOCKER_REPO_NAME)/$(DOCKER_IMAGE_NAME) -f Dockerfile .
